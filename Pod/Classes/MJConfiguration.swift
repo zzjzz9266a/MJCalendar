@@ -48,6 +48,7 @@ public struct MJConfiguration {
     
     public var rowHeight: CGFloat = 30
     public var dayViewSize: CGSize = CGSize(width: 24, height: 24)
+    public var indicatorWH: CGFloat = 5
     public var dayTextFont = UIFont.systemFont(ofSize: 12)
     
     public var otherMonthBackgroundColor = UIColor.clear

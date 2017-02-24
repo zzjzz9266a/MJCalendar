@@ -68,10 +68,12 @@ class DatePickerViewController: UIViewController, MJCalendarViewDelegate {
         self.calendarView.configuration.weekLabelFont = UIFont.systemFont(ofSize: 12)
         
         //Set day view size. It includes border width if selectedDayType = .Border
-        self.calendarView.configuration.dayViewSize = CGSize(width: 24, height: 24)
+        self.calendarView.configuration.dayViewSize = CGSize(width: 44, height: 44)
+        
+        self.calendarView.configuration.indicatorWH = 10
         
         //Set height of row with week's days
-        self.calendarView.configuration.rowHeight = 30
+        self.calendarView.configuration.rowHeight = 64
         
         // Set height of week's days names view
         self.calendarView.configuration.weekLabelHeight = 25
@@ -109,6 +111,10 @@ class DatePickerViewController: UIViewController, MJCalendarViewDelegate {
     }
     
     func calendar(_ calendarView: MJCalendarView, textColorForDate date: Date) -> UIColor? {
+        return nil
+    }
+    
+    public func calendar(_ calendarView: MJCalendarView, indicatorForDate date: Date) -> Bool? {
         return nil
     }
     

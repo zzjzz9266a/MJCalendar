@@ -18,6 +18,7 @@ open class MJDayView: MJComponentView {
     var todayDate: Date!
     var label: UILabel!
     var borderView: UIView!
+    let indicator = UIView()
     var isSameMonth = true {
         didSet {
             if isSameMonth != oldValue {
@@ -37,6 +38,7 @@ open class MJDayView: MJComponentView {
         self.setUpGesture()
         self.setUpBorderView()
         self.setUpLabel()
+        self.setUpIndicator()
         self.updateView()
     }
     
@@ -63,6 +65,11 @@ open class MJDayView: MJComponentView {
         self.addSubview(self.label)
     }
     
+    func setUpIndicator() {
+        self.indicator.backgroundColor = UIColor.lightGray
+        self.addSubview(self.indicator)
+    }
+    
     override func updateFrame() {
         let labelSize = self.labelSize()
         let labelFrame = CGRect(x: (self.width() - labelSize.width) / 2,
@@ -73,6 +80,10 @@ open class MJDayView: MJComponentView {
         let borderFrame = CGRect(x: (self.width() - dayViewSize.width) / 2,
                                      y: (self.height() - dayViewSize.height) / 2, width: dayViewSize.width, height: dayViewSize.height)
         self.borderView.frame = borderFrame
+        
+        let indicatorWH = self.delegate.configurationWithComponent(self).indicatorWH
+        let indicatorFrame = CGRect(x: (width()-indicatorWH)/2, y: height()-indicatorWH, width: indicatorWH, height: indicatorWH)
+        self.indicator.frame = indicatorFrame
     }
     
     func labelSize() -> CGSize {
@@ -114,6 +125,9 @@ open class MJDayView: MJComponentView {
         self.label.layer.cornerRadius = labelCornerRadius
         let borderCornerRadius = self.delegate.configurationWithComponent(self).dayViewSize.width / 2
         self.borderView.layer.cornerRadius = borderCornerRadius
+        
+        let cornerRadius = self.delegate.configurationWithComponent(self).indicatorWH/2
+        self.indicator.layer.cornerRadius = cornerRadius
     }
     
     func setViewBackgrounds() {
@@ -169,5 +183,9 @@ open class MJDayView: MJComponentView {
     func setBorder() {
         self.borderView.backgroundColor = self.delegate.configurationWithComponent(self).selectedDayBackgroundColor
         self.borderView.isHidden = !(self.delegate.componentView(self, isDateSelected: self.date) && isSameMonth)
+    }
+    
+    func setIndicator(){
+        self.indicator.isHidden = !(self.delegate.indicator(self, date: self.date) ?? false)
     }
 }

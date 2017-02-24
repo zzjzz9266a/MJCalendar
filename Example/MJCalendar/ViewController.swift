@@ -218,6 +218,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return self.dayColors[date]?.backgroundColor
     }
     
+    func calendar(_ calendarView: MJCalendarView, indicatorForDate date: Date) -> Bool? {
+        return nil
+    }
+    
     func calendar(_ calendarView: MJCalendarView, textColorForDate date: Date) -> UIColor? {
         return self.dayColors[date]?.textColor
     }

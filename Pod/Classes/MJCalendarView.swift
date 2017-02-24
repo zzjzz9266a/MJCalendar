@@ -15,6 +15,7 @@ public protocol MJCalendarViewDelegate: NSObjectProtocol {
     func calendar(_ calendarView: MJCalendarView, didSelectDate date: Date)
     func calendar(_ calendarView: MJCalendarView, backgroundForDate date: Date) -> UIColor?
     func calendar(_ calendarView: MJCalendarView, textColorForDate date: Date) -> UIColor?
+    func calendar(_ calendarView: MJCalendarView, indicatorForDate date: Date) -> Bool?
 }
 
 open class MJCalendarView: UIView, UIScrollViewDelegate, MJComponentDelegate {
@@ -308,6 +309,10 @@ open class MJCalendarView: UIView, UIScrollViewDelegate, MJComponentDelegate {
     
     func isDateOutOfRange(_ componentView: MJComponentView, date: Date) -> Bool {
         return isDateLaterThanMax(date) || isDateEarlierThanMin(date)
+    }
+    
+    func indicator(_ componentView: MJDayView, date: Date) -> Bool? {
+        return self.calendarDelegate?.calendar(self, indicatorForDate: date)
     }
     
     // MARK: UIScrollViewDelegate
