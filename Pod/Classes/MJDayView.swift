@@ -102,6 +102,7 @@ open class MJDayView: MJComponentView {
         self.setTextColors()
         self.setViewBackgrounds()
         self.setBorder()
+        self.setIndicator()
     }
     
     func setText() {
